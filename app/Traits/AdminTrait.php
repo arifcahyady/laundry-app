@@ -9,7 +9,7 @@ trait AdminTrait
 {
     use ApiResponser;
 
-    public function index()
+    protected function index()
     {
         $admin = Booking::all();
         return $this->successResponse($admin, 'Success');

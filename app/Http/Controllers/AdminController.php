@@ -9,13 +9,17 @@ use App\Traits\AdminTrait;
 
 class AdminController extends Controller
 {
+    use AdminTrait;
 
     public function __construct()
     {
         $this->middleware('auth:api');
     }
 
-    use AdminTrait;
+    public function index()
+    {
+        $this->index();
+    }
 
     public function confirm(Request $request, $id)
     {
