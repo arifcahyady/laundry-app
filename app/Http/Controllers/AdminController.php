@@ -5,22 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use App\Traits\ApiResponser;
+use App\Traits\AdminTrait;
 
 class AdminController extends Controller
 {
-    use ApiResponser;
 
     public function __construct()
     {
         $this->middleware('auth:api');
     }
 
-    public function index()
-    {
-        $admin = Booking::all();
-        return $this->successResponse($admin, 'Success');
-    }
+    use AdminTrait;
 
     public function confirm(Request $request, $id)
     {
