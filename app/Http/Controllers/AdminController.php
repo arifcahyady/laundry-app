@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Traits\ResponseTrait;
 
 class AdminController extends Controller
 {
@@ -16,7 +17,7 @@ class AdminController extends Controller
     public function index()
     {
         $admin = Booking::all();
-        return response()->json(['data' => $admin]);
+        return $this->successResponse($admin, 'Success');
     }
 
     public function confirm(Request $request, $id)
