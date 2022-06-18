@@ -8,37 +8,6 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 
 trait ApiResponser
 {
-    protected function successResponse($data, $message = null, $code = 200)
-    {
-        return response()->json([
-            'success' => true,
-            'status' => 'success',
-            'message' => $message,
-            'data' => $data,
-        ], $code);
-    }
-
-    protected function errorResponse($message, $code = 400)
-    {
-        return response()->json([
-            'success' => false,
-            'status' => 'error',
-            'message' => $message,
-            'data' => null,
-        ], $code);
-    }
-
-    protected function notFoundResponse($data = '')
-    {
-        return response()->json([
-            'success' => false,
-            'status' => 'not_found',
-            'message' => 'Data ' . $data . ' tidak ditemukan !',
-            'data' => null,
-        ], 404);
-    }
-
-
     // /**
     //  * @param array $data
     //  * @param int $statusCode
@@ -153,5 +122,6 @@ trait ApiResponser
     //         $headers
     //     );
     // }
+
 
 }
