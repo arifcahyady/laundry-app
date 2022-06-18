@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Http\ResponseTrait as HttpResponseTrait;
+use App\Traits\ApiResponser;
 
 class AdminController extends Controller
 {
-    use HttpResponseTrait;
+    use ApiResponser;
 
     public function __construct()
     {
