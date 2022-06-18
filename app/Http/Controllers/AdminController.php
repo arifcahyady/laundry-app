@@ -9,6 +9,8 @@ use App\Traits\ResponseTrait;
 
 class AdminController extends Controller
 {
+    use ResponseTrait;
+
     public function __construct()
     {
         $this->middleware('auth:api');
