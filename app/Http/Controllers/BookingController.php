@@ -26,7 +26,7 @@ class BookingController extends Controller
 
     public function store(Request $request)
     {
-        $category = $this->bookingRepository->createBooking();
+        $category = $this->bookingRepository->createBooking($request);
 
         $request->validate([
             'laundry_type_id' => 'required',
