@@ -6,6 +6,7 @@ use App\Models\Booking;
 use App\Models\Category;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 trait BookingTrait
 {
