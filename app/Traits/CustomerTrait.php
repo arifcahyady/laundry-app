@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Models\User;
+use App\Repositories\CustomerRepository;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,10 +11,16 @@ use Illuminate\Support\Facades\Auth;
 trait CustomerTrait
 {
     use ApiResponser;
+    private $customerRepository;
+
+    public function __construct(CustomerRepository $customerRepository)
+    {
+        $this->customerRepository = $customerRepository;
+    }
 
     protected function getProfileCustomer()
     {
-        $customer = User::where('id', Auth::id())->first();
+        $customer = $this->customerRepository->getUser();
         return $this->successResponse($customer, 'Success');
     }
 
