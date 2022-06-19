@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Traits\CustomerTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
 {
+    use CustomerTrait;
+
     public function __construct()
     {
         $this->middleware('auth:api');
@@ -15,8 +18,7 @@ class CustomerController extends Controller
 
     public function index()
     {
-        $customer = User::where('id', Auth::id())->first();
-        return response()->json(['customer' => $customer]);
+        return $this->getProfileCustomer();
     }
 
     public function update(Request $request)
