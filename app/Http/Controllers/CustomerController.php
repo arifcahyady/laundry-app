@@ -23,20 +23,6 @@ class CustomerController extends Controller
 
     public function update(Request $request)
     {
-        $customer = User::where('id', Auth::id())->first();
-        $customer->name = $request->name;
-        $customer->address = $request->address;
-        $customer->number_phone = $request->number_phone;
-
-        if ($request->file('image')) {
-            $customer->image = $request->file('image')->store('images');
-        }
-
-        $customer->save();
-
-        return response()->json([
-            'message' => 'User successfully updated',
-            'customer' => $customer,
-        ]);
+        return $this->updateProfileCustomer($request);
     }
 }
