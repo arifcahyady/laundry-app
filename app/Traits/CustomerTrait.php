@@ -21,22 +21,23 @@ trait CustomerTrait
 
     protected function getProfileCustomer()
     {
-        $customer = $this->customerRepository->getUser($this->customer);
+        $customer = $this->customerRepository;
+        dd($customer);
         return $this->successResponse($customer, 'Success');
     }
 
-    protected function updateProfileCustomer(Request $request)
-    {
-        $customer = User::where('id', Auth::id())->first();
-        $customer->name = $request->name;
-        $customer->address = $request->address;
-        $customer->number_phone = $request->number_phone;
+    // protected function updateProfileCustomer(Request $request)
+    // {
+    //     $customer = User::where('id', Auth::id())->first();
+    //     $customer->name = $request->name;
+    //     $customer->address = $request->address;
+    //     $customer->number_phone = $request->number_phone;
 
-        if ($request->file('image')) {
-            $customer->image = $request->file('image')->store('images');
-        }
+    //     if ($request->file('image')) {
+    //         $customer->image = $request->file('image')->store('images');
+    //     }
 
-        $customer->save();
-        return $this->successResponse($customer, 'User has been updated successfully');
-    }
+    //     $customer->save();
+    //     return $this->successResponse($customer, 'User has been updated successfully');
+    // }
 }

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CustomerRepository
 {
-    public function getUser($customer)
+    public function getUser()
     {
         $customer = User::where('id', Auth::id())->first();
         return $customer;
