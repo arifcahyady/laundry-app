@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use App\Traits\AdminTrait;
+use App\Traits\ApiResponser;
 
 class AdminController extends Controller
 {
-    use AdminTrait;
+    use ApiResponser;
 
     public function __construct()
     {
@@ -18,7 +18,8 @@ class AdminController extends Controller
 
     public function index()
     {
-        $this->index();
+        $admin = Booking::all();
+        return $this->successResponse($admin, 'Success');
     }
 
     public function confirm(Request $request, $id)
