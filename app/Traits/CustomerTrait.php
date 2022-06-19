@@ -10,14 +10,16 @@ use Illuminate\Support\Facades\Auth;
 
 trait CustomerTrait
 {
-    use ApiResponser;
-
     protected $customerRepository;
 
     public function __construct(CustomerRepository $customerRepository)
     {
         $this->customerRepository = $customerRepository;
     }
+
+    use ApiResponser;
+
+
 
     protected function getProfileCustomer()
     {
