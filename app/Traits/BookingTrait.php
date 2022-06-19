@@ -7,7 +7,7 @@ use App\Models\Category;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 
-trait AdminTrait
+trait BookingTrait
 {
     use ApiResponser;
 
