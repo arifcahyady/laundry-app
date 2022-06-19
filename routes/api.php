@@ -37,12 +37,12 @@ Route::group(['middleware' => ['auth:api', 'role:customer|admin'], 'prefix' => '
     Route::post('/update', [CustomerController::class, 'update']);
 });
 
-Route::group(['middleware' => ['api', 'role:admin'], 'prefix' => 'admin'], function () {
+Route::group(['middleware' => ['auth:api', 'role:admin'], 'prefix' => 'admin'], function () {
     Route::get('/', [AdminController::class, 'index']);
     Route::post('/confirm/{id}', [AdminController::class, 'confirm']);
 });
 
-Route::group(['middleware' => ['api', 'role:customer|admin'], 'prefix' => 'booking'], function () {
+Route::group(['middleware' => ['auth:api', 'role:customer|admin'], 'prefix' => 'booking'], function () {
     Route::get('/', [BookingController::class, 'index']);
     Route::post('/', [BookingController::class, 'store']);
 });

@@ -8,8 +8,6 @@ use App\Traits\AdminTrait;
 use Illuminate\Http\Request;
 use App\Traits\ApiResponser;
 
-use function Symfony\Component\String\b;
-
 class AdminController extends Controller
 {
     use ApiResponser;
