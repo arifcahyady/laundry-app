@@ -3,21 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Traits\CustomerTrait;
+use App\Repositories\CustomerRepository;
+use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
-    use CustomerTrait;
+    use ApiResponser;
 
-    public function __construct()
+    protected $customerRepository;
+
+    public function __construct(CustomerRepository $customerRepository)
     {
-        $this->middleware('auth:api');
+        $this->customerRepository = $customerRepository;
     }
 
     public function index()
     {
-        return $this->getProfileCustomer();
+        $customer = $this->customerRepository->getUser();
+        return $this->successResponse($customer, 'Success');
     }
 
     public function update(Request $request)

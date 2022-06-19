@@ -12,16 +12,11 @@ trait CustomerTrait
 {
     use ApiResponser;
 
-    private $customer;
 
-    public function __construct(CustomerRepository $customerRepository)
-    {
-        $this->customer = $customerRepository;
-    }
 
     protected function getProfileCustomer()
     {
-        $customer = $this->customer;
+        $customer = $this->customerRepository;
         dd($customer);
         return $this->successResponse($customer, 'Success');
     }
