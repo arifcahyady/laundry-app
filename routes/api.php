@@ -32,7 +32,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
-Route::group(['middleware' => ['api', 'role:customer|admin'], 'prefix' => 'customer'], function () {
+Route::group(['middleware' => ['auth:api', 'role:customer|admin'], 'prefix' => 'customer'], function () {
     Route::get('/', [CustomerController::class, 'index']);
     Route::post('/update', [CustomerController::class, 'update']);
 });
