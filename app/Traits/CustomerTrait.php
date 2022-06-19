@@ -10,20 +10,18 @@ use Illuminate\Support\Facades\Auth;
 
 trait CustomerTrait
 {
-    protected $customerRepository;
+    use ApiResponser;
+
+    protected $customer;
 
     public function __construct(CustomerRepository $customerRepository)
     {
-        $this->customerRepository = $customerRepository;
+        $this->customer = $customerRepository;
     }
-
-    use ApiResponser;
-
-
 
     protected function getProfileCustomer()
     {
-        $customer = $this->customerRepository;
+        $customer = $this->customer;
         dd($customer);
         return $this->successResponse($customer, 'Success');
     }
