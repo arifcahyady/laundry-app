@@ -2,14 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-
-class CustomerRepository
+interface CustomerRepository
 {
-    public function getUser()
-    {
-        $customer = User::all();
-        return $customer;
-    }
+    public function getUser();
 }

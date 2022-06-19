@@ -4,25 +4,24 @@ namespace App\Traits;
 
 use App\Models\User;
 use App\Repositories\CustomerRepository;
+use App\Repositories\EloquentCustomerRepository;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 trait CustomerTrait
 {
+    protected $eloquentCustomer;
     use ApiResponser;
 
-    protected $customerRepository;
-
-    public function __construct(CustomerRepository $customerRepository)
+    public function __construct(EloquentCustomerRepository $eloquentCustomer)
     {
-        $this->customerRepository = $customerRepository;
+        $this->eloquentCustomer = $eloquentCustomer;
     }
 
     protected function getProfileCustomer()
     {
-        $customer = $this->customerRepository->getUser();
-        dd($customer);
+        $customer = $this->eloquentCustomer->getUser();
         return $this->successResponse($customer, 'Success');
     }
 
