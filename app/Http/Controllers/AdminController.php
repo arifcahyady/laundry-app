@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Category;
+use App\Traits\AdminTrait;
 use Illuminate\Http\Request;
 use App\Traits\ApiResponser;
 
 class AdminController extends Controller
 {
-    use ApiResponser;
+    use ApiResponser, AdminTrait;
 
     public function __construct()
     {
@@ -18,7 +19,7 @@ class AdminController extends Controller
 
     public function index()
     {
-        $admin = Booking::all();
+        $admin = $this->getBooking();
         return $this->successResponse($admin, 'Success');
     }
 
