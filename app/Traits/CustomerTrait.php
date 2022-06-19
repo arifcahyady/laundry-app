@@ -14,7 +14,7 @@ trait CustomerTrait
     protected function getProfileCustomer()
     {
         $customer = User::where('id', Auth::id())->first();
-        return $this->successResponse($customer, 'Success', 200);
+        return $this->successResponse($customer, 'Success');
     }
 
     protected function updateProfileCustomer(Request $request)
@@ -29,6 +29,6 @@ trait CustomerTrait
         }
 
         $customer->save();
-        return $this->successResponse($customer, 'User has been updated successfully', 204);
+        return $this->successResponse($customer, 'User has been updated successfully');
     }
 }
