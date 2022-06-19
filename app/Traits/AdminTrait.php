@@ -21,7 +21,7 @@ trait AdminTrait
     {
         $booking = Booking::find($id);
 
-        if (!$booking->id) {
+        if ($booking->id !== $id) {
             return $this->errorResponse('Booking not found');
         }
 
