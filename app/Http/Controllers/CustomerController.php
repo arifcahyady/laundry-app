@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Repositories\CustomerRepository;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
@@ -26,6 +25,16 @@ class CustomerController extends Controller
 
     public function update(Request $request)
     {
-        return $this->updateProfileCustomer($request);
+        $customer = $this->customerRepository->getUser();
+        $customer->name = $request->name;
+        $customer->address = $request->address;
+        $customer->number_phone = $request->number_phone;
+
+        if ($request->file('image')) {
+            $customer->image = $request->file('image')->store('images');
+        }
+
+        $customer->save();
+        return $this->successResponse($customer, 'User has been updated successfully');
     }
 }
