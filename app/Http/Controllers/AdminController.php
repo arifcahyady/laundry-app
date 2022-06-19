@@ -19,8 +19,7 @@ class AdminController extends Controller
 
     public function index()
     {
-        $admin = $this->getBooking();
-        return $this->successResponse($admin, 'Success');
+        return $this->getBooking();
     }
 
     public function confirm(Request $request, $id)
