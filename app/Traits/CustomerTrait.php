@@ -12,7 +12,7 @@ trait CustomerTrait
 {
     use ApiResponser;
 
-    protected $customer;
+    private $customer;
 
     public function __construct(CustomerRepository $customerRepository)
     {
