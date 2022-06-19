@@ -9,7 +9,7 @@ class CustomerRepository
 {
     public function getUser()
     {
-        $customer = User::where('id', Auth::id())->firstorFail();
+        $customer = User::all();
         return $customer;
     }
 }
