@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Auth;
 trait CustomerTrait
 {
     use ApiResponser;
-    private $customerRepository;
+
+    protected $customerRepository;
 
     public function __construct(CustomerRepository $customerRepository)
     {
@@ -21,6 +22,7 @@ trait CustomerTrait
     protected function getProfileCustomer()
     {
         $customer = $this->customerRepository->getUser();
+        dd($customer);
         return $this->successResponse($customer, 'Success');
     }
 
