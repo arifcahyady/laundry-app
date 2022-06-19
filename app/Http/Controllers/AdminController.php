@@ -3,29 +3,43 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Repositories\AdminRepository;
 use App\Traits\AdminTrait;
 use Illuminate\Http\Request;
 use App\Traits\ApiResponser;
-use Illuminate\Support\Facades\Redis;
 
 use function Symfony\Component\String\b;
 
 class AdminController extends Controller
 {
-    use ApiResponser, AdminTrait;
+    use ApiResponser;
 
-    public function __construct()
+    protected $adminRepository;
+
+    public function __construct(adminRepository $adminRepository)
     {
-        $this->middleware('auth:api');
+        $this->adminRepository = $adminRepository;
     }
 
     public function index()
     {
-        return $this->getBooking();
+        $admin = $this->adminRepository->getBookingAll();
+        return $this->successResponse($admin, 'Success', 200);
     }
 
     public function confirm(Request $request, $id)
     {
-        return $this->confirmBooking($request, $id);
+        if (!$booking = Booking::find($id)) {
+            return $this->notFoundResponse('booking');
+        }
+
+        $category = $this->adminRepository->confirmBooking($id);
+        $booking->laundry_type_id = $category->id;
+        $booking->weight = round($request->weight);
+        $booking->status = true;
+        $booking->price = $category->price * $request->weight;
+        $booking->save();
+
+        return $this->successResponse($booking, 'Booking successfully confirmed', 200);
     }
 }
