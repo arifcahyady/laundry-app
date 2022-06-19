@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
-use App\Models\Category;
 use App\Traits\AdminTrait;
 use Illuminate\Http\Request;
 use App\Traits\ApiResponser;
+use Illuminate\Support\Facades\Redis;
+
+use function Symfony\Component\String\b;
 
 class AdminController extends Controller
 {
@@ -24,17 +26,6 @@ class AdminController extends Controller
 
     public function confirm(Request $request, $id)
     {
-        $booking = Booking::find($id);
-        $category = Category::where('id', $booking->laundry_type_id)->first();
-        $booking->laundry_type_id   = $category->id;
-        $booking->weight = round($request->weight);
-        $booking->status = true;
-        $booking->price = $category->price * $request->weight;
-        $booking->save();
-
-        return response()->json([
-            'message' => 'Booking Successful Confirmation',
-            'data' => $booking,
-        ]);
+        return $this->confirmBooking($request, $id);
     }
 }
