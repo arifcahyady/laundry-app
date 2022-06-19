@@ -19,10 +19,10 @@ trait AdminTrait
 
     protected function confirmBooking(Request $request, $id)
     {
-        if (!$id) {
-            return $this->errorResponse('Booking not found');
+        if (!$booking = Booking::find($id)) {
+            return $this->errorResponse('Booking not found', 404);
         }
-        $booking = Booking::find($id);
+
         $category = Category::where('id', $booking->laundry_type_id)->first();
         $booking->laundry_type_id   = $category->id;
         $booking->weight = round($request->weight);
