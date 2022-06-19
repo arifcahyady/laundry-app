@@ -14,14 +14,14 @@ trait CustomerTrait
 
     protected $customerRepository;
 
-    public function __construct(CustomerRepository $customer)
+    public function __construct(CustomerRepository $customerRepository)
     {
-        $this->customerRepository = $customer;
+        $this->customerRepository = $customerRepository;
     }
 
     protected function getProfileCustomer()
     {
-        $customer = $this->customerRepository->all();
+        $customer = $this->customerRepository->getUser($this->customer);
         return $this->successResponse($customer, 'Success');
     }
 
